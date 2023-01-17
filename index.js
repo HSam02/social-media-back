@@ -24,9 +24,12 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("DB ok"))
   .catch((err) => console.log(`DB error: ${err}`));
-
-const app = express();
-
+  
+  const app = express();
+  app.use(express.json());
+  app.use("/uploads", express.static("uploads"));
+  app.use(cors());
+  
 const storage = multer.diskStorage({
   destination: (_, __, callback) => {
     if (fs.existsSync("uploads")) {
@@ -44,9 +47,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.use(express.json());
-app.use("/uploads", express.static("uploads"));
-app.use(cors());
 
 app.post(
   "/auth/register",
