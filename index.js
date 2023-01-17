@@ -28,7 +28,7 @@ mongoose
   const app = express();
   app.use(express.json());
   app.use("/uploads", express.static("uploads"));
-  app.use(cors());
+  app.use(cors({origin: "*"}));
   
 const storage = multer.diskStorage({
   destination: (_, __, callback) => {
