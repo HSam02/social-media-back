@@ -28,13 +28,13 @@ mongoose
 const app = express();
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
-app.use(
-  cors({
-    origin: "https://social-media-front-rho.vercel.app",
-    credentials: true,
-    optionsSuccessStatus: 200,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://social-media-front-rho.vercel.app",
+//     credentials: true,
+//     optionsSuccessStatus: 200,
+//   })
+// );
 
 // const allowCrossDomain = function allowCrossDomain(req, res, next) {
 //   console.log(">>>>>>>>>>");
@@ -55,16 +55,16 @@ app.use(
 
 // app.use(allowCrossDomain);
 
-// app.use(function (req, res, next) {
-//   //Enabling CORS
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
-//   );
-//   next();
-// });
+app.use(function (req, res, next) {
+  //Enabling CORS
+  res.setHeader("Access-Control-Allow-Origin", "https://social-media-front-rho.vercel.app");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
+  );
+  next();
+});
 
 const storage = multer.diskStorage({
   destination: (_, __, callback) => {
